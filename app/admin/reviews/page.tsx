@@ -36,17 +36,25 @@ export default function ReviewsPage() {
       const { data, error } = await supabase
         .from('reviews')
         .select(`
-          id,
-          rating,
-          comment,
-          created_at,
-          tool:tool_id(id, name, slug),
-          user:user_id(id, display_name)
+          *,
+          tools!inner(id, name, slug),
+          user_profiles!inner(id, display_name)
         `)
         .order('created_at', { ascending: false });
 
       if (error) throw error;
-      setReviews(data as any || []);
+
+      // Transform data to match our interface
+      const transformedData = data?.map((review: any) => ({
+        id: review.id,
+        rating: review.rating,
+        comment: review.comment,
+        created_at: review.created_at,
+        tool: review.tools,
+        user: review.user_profiles
+      })) || [];
+
+      setReviews(transformedData);
     } catch (error: any) {
       console.error('Error fetching reviews:', error);
     } finally {
