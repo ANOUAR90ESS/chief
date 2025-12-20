@@ -39,3 +39,39 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# local database files (obsolete - using Supabase)
+*.db
+*.db-journal
+
+# Cloudflare Workers
+cloudflare-api/node_modules
+cloudflare-api/.wrangler
+cloudflare-api/dist
+cloudflare-api/.dev.vars
+cloudflare-api/wrangler.toml.backup
+
+# Sensitive files
+*.key
+*.pem
+*.cert
+credentials.json
+service-account.json
+
+# Temporary documentation files
+QUICK_START.md
+DEPLOY_STEP_BY_STEP.md
+DEPLOY_COMMANDS.md
+ARCHITECTURE.md
+CLEANUP_SUMMARY.md
+MIGRATION_COMPLETE.md
+NEXT_STEPS.md
+PROJECT_STRUCTURE.md
+SUPABASE_MIGRATION.md
+SUPABASE_SETUP.md
+DOCS_INDEX.md
+
+# SQL dumps and schemas (keep only in supabase/migrations)
+schema.sql
+dump.sql
+backup.sql
