@@ -1,0 +1,21 @@
+{
+  "name": "aichief-api",
+  "version": "1.0.0",
+  "description": "AIChief Backend API on Cloudflare Workers",
+  "main": "src/index.ts",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "tail": "wrangler tail"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.89.0",
+    "hono": "^4.0.0",
+    "openai": "^4.73.0"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20241127.0",
+    "wrangler": "^3.94.0",
+    "typescript": "^5.7.2"
+  }
+}
