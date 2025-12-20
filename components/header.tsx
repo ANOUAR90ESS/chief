@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Menu, X, Search, Moon, Sun, ChevronDown, Shield } from 'lucide-react';
+import { Menu, X, Search, Moon, Sun, ChevronDown, Shield, LogIn } from 'lucide-react';
 import { useTheme } from 'next-themes';
 import { createClient } from '@/lib/supabase/client';
 
@@ -111,14 +111,22 @@ export default function Header() {
             </kbd>
           </button>
 
-          {/* Admin Button (only for admins) */}
-          {isAdmin && (
+          {/* Admin Button (only for logged-in admins) */}
+          {isAdmin ? (
             <a
               href="/admin"
               className="hidden md:flex items-center gap-2 px-3 py-1.5 bg-accent text-white rounded-lg hover:bg-accent/90 transition-colors text-sm font-semibold"
             >
               <Shield className="w-4 h-4" />
               Admin
+            </a>
+          ) : (
+            <a
+              href="/auth/signin"
+              className="hidden md:flex items-center gap-2 px-3 py-1.5 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors text-sm font-semibold"
+            >
+              <LogIn className="w-4 h-4" />
+              Login
             </a>
           )}
 
@@ -187,6 +195,18 @@ export default function Header() {
               <Search className="w-4 h-4" />
               <span className="text-sm">Search</span>
             </button>
+            {/* Login/Admin button for mobile */}
+            {isAdmin ? (
+              <a href="/admin" className="md:hidden flex items-center gap-2 px-3 py-2 bg-accent text-white rounded-lg hover:bg-accent/90 transition-colors text-sm font-semibold">
+                <Shield className="w-4 h-4" />
+                Admin Panel
+              </a>
+            ) : (
+              <a href="/auth/signin" className="md:hidden flex items-center gap-2 px-3 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors text-sm font-semibold">
+                <LogIn className="w-4 h-4" />
+                Login
+              </a>
+            )}
           </nav>
         </div>
       )}
