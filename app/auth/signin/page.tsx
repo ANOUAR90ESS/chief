@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { LogIn } from 'lucide-react';
 import { signInWithEmail } from '@/lib/supabase/auth';
+import Link from 'next/link';
 
 export default function SignInPage() {
   const router = useRouter();
@@ -90,7 +91,16 @@ export default function SignInPage() {
             </button>
           </form>
 
-          <div className="mt-6 p-4 bg-blue-500/10 border border-blue-500/20 rounded-lg">
+          <div className="mt-6 text-center">
+            <p className="text-sm text-secondary">
+              ¿No tienes cuenta?{' '}
+              <Link href="/auth/signup" className="text-primary hover:underline font-medium">
+                Regístrate aquí
+              </Link>
+            </p>
+          </div>
+
+          <div className="mt-4 p-4 bg-blue-500/10 border border-blue-500/20 rounded-lg">
             <p className="text-sm text-blue-500 mb-2 font-medium">
               Credenciales de prueba:
             </p>
@@ -103,9 +113,9 @@ export default function SignInPage() {
         </div>
 
         <div className="text-center mt-4">
-          <a href="/" className="text-sm text-secondary hover:text-primary transition-colors">
+          <Link href="/" className="text-sm text-secondary hover:text-primary transition-colors">
             ← Volver al sitio
-          </a>
+          </Link>
         </div>
       </div>
     </div>

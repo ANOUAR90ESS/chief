@@ -9,7 +9,8 @@ import {
   Users,
   Star,
   Settings,
-  LogOut
+  LogOut,
+  FolderOpen
 } from 'lucide-react';
 import { createClient } from '@/lib/supabase/client';
 import { signOut } from '@/lib/supabase/auth';
@@ -114,6 +115,13 @@ export default function AdminLayout({
               >
                 <Package className="w-5 h-5" />
                 <span className="font-medium">Herramientas</span>
+              </Link>
+              <Link
+                href="/admin/categories"
+                className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-secondary/10 transition-colors"
+              >
+                <FolderOpen className="w-5 h-5" />
+                <span className="font-medium">Categorías</span>
               </Link>
               <Link
                 href="/admin/users"

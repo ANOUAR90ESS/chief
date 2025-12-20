@@ -4,7 +4,7 @@ compatibility_date = "2024-12-01"
 
 # Variables de entorno (usar wrangler secret para producción)
 [vars]
-ALLOWED_ORIGINS = "http://localhost:3000,https://tu-dominio.vercel.app"
+ALLOWED_ORIGINS = "http://localhost:3000,https://www.vetorre.com"
 
 # Secrets (configurar con: wrangler secret put SECRET_NAME)
 # OPENAI_API_KEY
