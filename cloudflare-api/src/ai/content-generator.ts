@@ -11,7 +11,7 @@ export async function generateContent(
 
   const { data: tool } = await supabase
     .from('tools')
-    .select('name, description, url, category:categories(name)')
+    .select('name, description, url, category_id, categories(name)')
     .eq('id', toolId)
     .single();
 
@@ -19,27 +19,30 @@ export async function generateContent(
     throw new Error('Tool not found');
   }
 
+  // Extract category name
+  const categoryName = (tool as any).categories?.name || 'AI tools';
+
   // Initialize OpenAI
   const openai = new OpenAI({
     apiKey: env.OPENAI_API_KEY,
   });
 
   const prompts = {
-    description: `Write a compelling 2-3 paragraph description for ${tool.name}, an AI tool in the ${tool.category?.name} category.
+    description: `Write a compelling 2-3 paragraph description for ${tool.name}, an AI tool in the ${categoryName} category.
 
 Current description: ${tool.description}
 Website: ${tool.url}
 
 Make it engaging, informative, and SEO-friendly. Focus on what makes this tool unique and valuable to users.`,
 
-    features: `List the top 10 key features of ${tool.name}, an AI tool for ${tool.category?.name}.
+    features: `List the top 10 key features of ${tool.name}, an AI tool for ${categoryName}.
 
 Format as a JSON array of feature objects with "title" and "description" fields.
 Example: [{"title": "Feature Name", "description": "Brief description"}]
 
 Make features specific, actionable, and valuable to potential users.`,
 
-    benefits: `List the top 8 benefits of using ${tool.name} for ${tool.category?.name} tasks.
+    benefits: `List the top 8 benefits of using ${tool.name} for ${categoryName} tasks.
 
 Format as a JSON array of benefit objects with "title" and "description" fields.
 Example: [{"title": "Benefit Title", "description": "How it helps users"}]

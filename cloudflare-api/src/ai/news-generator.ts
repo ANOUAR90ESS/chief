@@ -21,12 +21,13 @@ export async function generateNews(
     const supabase = createClient(env.SUPABASE_URL, env.SUPABASE_SERVICE_ROLE_KEY);
     const { data: tool } = await supabase
       .from('tools')
-      .select('name, description, category:categories(name)')
+      .select('name, description, category_id, categories(name)')
       .eq('id', toolId)
       .single();
 
     if (tool) {
-      toolContext = `This news is about ${tool.name}, an AI tool in the ${tool.category?.name} category. ${tool.description}`;
+      const categoryName = (tool as any).categories?.name || 'AI tools';
+      toolContext = `This news is about ${tool.name}, an AI tool in the ${categoryName} category. ${tool.description}`;
     }
   }
 

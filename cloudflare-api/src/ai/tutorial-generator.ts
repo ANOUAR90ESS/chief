@@ -22,7 +22,7 @@ export async function generateTutorial(
 
   const { data: tool } = await supabase
     .from('tools')
-    .select('name, description, url, category:categories(name)')
+    .select('name, description, url, category_id, categories(name)')
     .eq('id', toolId)
     .single();
 
@@ -30,11 +30,13 @@ export async function generateTutorial(
     throw new Error('Tool not found');
   }
 
+  const categoryName = (tool as any).categories?.name || 'AI tools';
+
   const openai = new OpenAI({
     apiKey: env.OPENAI_API_KEY,
   });
 
-  const prompt = `Create a comprehensive step-by-step tutorial for ${tool.name}, an AI tool for ${tool.category?.name}.
+  const prompt = `Create a comprehensive step-by-step tutorial for ${tool.name}, an AI tool for ${categoryName}.
 
 Tool Info:
 - Name: ${tool.name}

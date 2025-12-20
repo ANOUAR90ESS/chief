@@ -28,7 +28,7 @@ export async function generateCourse(
 
   const { data: tool } = await supabase
     .from('tools')
-    .select('name, description, url, category:categories(name)')
+    .select('name, description, url, category_id, categories(name)')
     .eq('id', toolId)
     .single();
 
@@ -36,11 +36,13 @@ export async function generateCourse(
     throw new Error('Tool not found');
   }
 
+  const categoryName = (tool as any).categories?.name || 'AI tools';
+
   const openai = new OpenAI({
     apiKey: env.OPENAI_API_KEY,
   });
 
-  const prompt = `Design a comprehensive online course for mastering ${tool.name}, an AI tool in the ${tool.category?.name} category.
+  const prompt = `Design a comprehensive online course for mastering ${tool.name}, an AI tool in the ${categoryName} category.
 
 Tool Info:
 - Name: ${tool.name}
