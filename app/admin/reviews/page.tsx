@@ -36,9 +36,14 @@ export default function ReviewsPage() {
       const { data, error } = await supabase
         .from('reviews')
         .select(`
-          *,
-          tools!inner(id, name, slug),
-          user_profiles!inner(id, display_name)
+          id,
+          rating,
+          comment,
+          created_at,
+          tool_id,
+          user_id,
+          tools(id, name, slug),
+          user_profiles(id, display_name)
         `)
         .order('created_at', { ascending: false });
 
