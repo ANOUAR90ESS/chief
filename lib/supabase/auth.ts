@@ -56,7 +56,7 @@ export async function getUserProfile() {
     .single();
 
   if (error && error.code !== 'PGRST116') {
-    console.error('Error fetching profile:', error);
+    // Profile not found or other error - return null gracefully
     return null;
   }
 

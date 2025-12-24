@@ -47,7 +47,7 @@ export default function Header() {
         {/* Logo */}
         <div className="flex items-center gap-8">
           <a href="/" className="flex items-center gap-2">
-            <div className="text-2xl font-bold text-gradient">AIChief</div>
+            <div className="text-2xl font-bold text-gradient">Vetorre</div>
           </a>
 
           {/* Desktop Navigation */}

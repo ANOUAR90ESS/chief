@@ -18,7 +18,7 @@ async function getAllTools() {
       .limit(6);
 
     if (error) {
-      console.error('Error fetching tools:', error);
+      // Return empty array on error - component handles gracefully
       return [];
     }
 
@@ -38,7 +38,7 @@ async function getAllTools() {
 
     return toolsWithRating;
   } catch (error) {
-    console.error('Error fetching tools:', error);
+    // Return empty array on error - component handles gracefully
     return [];
   }
 }

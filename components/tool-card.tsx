@@ -1,4 +1,5 @@
 import { Star, BadgeCheck, ExternalLink } from 'lucide-react';
+import Link from 'next/link';
 import { AITool } from '@/lib/types';
 
 interface ToolCardProps {
@@ -16,8 +17,8 @@ export default function ToolCard({ tool }: ToolCardProps) {
       )}
 
       <div className="flex flex-col h-full">
-        {/* Header */}
-        <div className="flex items-start gap-4 mb-4">
+        {/* Header - Clickable */}
+        <Link href={`/tools/${tool.id}`} className="flex items-start gap-4 mb-4 cursor-pointer">
           {/* Tool Image/Icon */}
           <div className="w-16 h-16 bg-gradient-to-br from-primary/20 to-accent/20 rounded-lg flex items-center justify-center flex-shrink-0">
             <span className="text-2xl font-bold text-gradient">
@@ -28,7 +29,9 @@ export default function ToolCard({ tool }: ToolCardProps) {
           {/* Tool Info */}
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2 mb-1">
-              <h3 className="font-bold text-lg truncate">{tool.name}</h3>
+              <h3 className="font-bold text-lg truncate group-hover:text-primary transition-colors">
+                {tool.name}
+              </h3>
               {tool.verified && (
                 <BadgeCheck className="w-5 h-5 text-primary flex-shrink-0" />
               )}
@@ -42,7 +45,7 @@ export default function ToolCard({ tool }: ToolCardProps) {
               </span>
             </div>
           </div>
-        </div>
+        </Link>
 
         {/* Description */}
         <p className="text-sm text-secondary mb-4 line-clamp-2 flex-1">

@@ -17,17 +17,20 @@ const app = new Hono<{ Bindings: Bindings }>();
 
 // CORS middleware
 app.use('/*', async (c, next) => {
-  const allowedOrigins = c.env.ALLOWED_ORIGINS.split(',');
+  const allowedOrigins = c.env.ALLOWED_ORIGINS?.split(',') || [];
   const origin = c.req.header('origin') || '';
 
+  // Set CORS headers for allowed origins
   if (allowedOrigins.includes(origin)) {
     c.header('Access-Control-Allow-Origin', origin);
-    c.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-    c.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   }
 
+  c.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  c.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  c.header('Access-Control-Max-Age', '86400');
+
   if (c.req.method === 'OPTIONS') {
-    return new Response(null, { status: 204 });
+    return c.body(null, 204);
   }
 
   await next();

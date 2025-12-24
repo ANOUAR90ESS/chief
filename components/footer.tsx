@@ -7,7 +7,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-8">
           {/* Brand */}
           <div className="lg:col-span-2">
-            <div className="text-2xl font-bold text-gradient mb-4">AIChief</div>
+            <div className="text-2xl font-bold text-gradient mb-4">Vetorre</div>
             <p className="text-sm text-secondary mb-4 max-w-sm">
               Your comprehensive directory for discovering, comparing, and choosing the best AI tools for your needs.
             </p>
@@ -175,7 +175,7 @@ export default function Footer() {
 
         {/* Copyright */}
         <div className="border-t border-border pt-8 text-center text-sm text-secondary">
-          <p>&copy; 2025 AIChief. All rights reserved.</p>
+          <p>&copy; 2025 Vetorre. All rights reserved.</p>
         </div>
       </div>
     </footer>

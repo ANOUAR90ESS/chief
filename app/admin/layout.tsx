@@ -10,7 +10,8 @@ import {
   Star,
   Settings,
   LogOut,
-  FolderOpen
+  FolderOpen,
+  Sparkles
 } from 'lucide-react';
 import { createClient } from '@/lib/supabase/client';
 import { signOut } from '@/lib/supabase/auth';
@@ -136,6 +137,13 @@ export default function AdminLayout({
               >
                 <Star className="w-5 h-5" />
                 <span className="font-medium">Reseñas</span>
+              </Link>
+              <Link
+                href="/admin/ai-generator"
+                className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-secondary/10 transition-colors"
+              >
+                <Sparkles className="w-5 h-5" />
+                <span className="font-medium">Generador IA</span>
               </Link>
               <Link
                 href="/admin/settings"

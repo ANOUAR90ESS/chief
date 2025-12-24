@@ -58,7 +58,7 @@ cloudflare-api/wrangler.toml.backup
 credentials.json
 service-account.json
 
-# Temporary documentation files
+# Temporary documentation files (old - these can be deleted if found)
 QUICK_START.md
 DEPLOY_STEP_BY_STEP.md
 DEPLOY_COMMANDS.md
@@ -71,7 +71,14 @@ SUPABASE_MIGRATION.md
 SUPABASE_SETUP.md
 DOCS_INDEX.md
 
+# Keep these production docs (do NOT ignore):
+# DEPLOYMENT.md
+# PRODUCTION_READY.md
+# QUICK_DEPLOY.md
+
 # SQL dumps and schemas (keep only in supabase/migrations)
 schema.sql
 dump.sql
 backup.sql
+
+.vercel

@@ -14,8 +14,27 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "AIChief - Discover the Best AI Tools",
-  description: "Explore 11,283+ AI tools across 180+ categories. Find the perfect AI solution for your needs.",
+  title: "Vetorre - Discover the Best AI Tools",
+  description: "Explore thousands of AI tools across 180+ categories. Find the perfect AI solution for your needs.",
+  keywords: ["AI tools", "artificial intelligence", "AI directory", "machine learning tools", "AI solutions"],
+  authors: [{ name: "Vetorre" }],
+  creator: "Vetorre",
+  publisher: "Vetorre",
+  robots: "index, follow",
+  openGraph: {
+    title: "Vetorre - Discover the Best AI Tools",
+    description: "Explore thousands of AI tools across 180+ categories. Find the perfect AI solution for your needs.",
+    url: "https://vetorre.com",
+    siteName: "Vetorre",
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Vetorre - Discover the Best AI Tools",
+    description: "Explore thousands of AI tools across 180+ categories.",
+    creator: "@vetorre",
+  },
 };
 
 export default function RootLayout({
