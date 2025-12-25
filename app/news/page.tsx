@@ -2,6 +2,7 @@ import Header from '@/components/header';
 import Footer from '@/components/footer';
 import { createClient } from '@/lib/supabase/server';
 import { Calendar, Tag } from 'lucide-react';
+import Link from 'next/link';
 import Image from 'next/image';
 
 export const dynamic = 'force-dynamic';
@@ -59,9 +60,10 @@ export default async function NewsPage() {
             ) : (
               <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {newsArticles.map((article: any) => (
-                  <article
+                  <Link
                     key={article.id}
-                    className="bg-background border border-border rounded-xl overflow-hidden hover:border-primary/50 hover:shadow-lg transition-all"
+                    href={`/news/${article.id}`}
+                    className="block bg-background border border-border rounded-xl overflow-hidden hover:border-primary/50 hover:shadow-lg transition-all cursor-pointer"
                   >
                     {article.image_url && (
                       <div className="relative w-full h-48 bg-secondary/10">
@@ -111,7 +113,7 @@ export default async function NewsPage() {
                         )}
                       </div>
                     </div>
-                  </article>
+                  </Link>
                 ))}
               </div>
             )}
