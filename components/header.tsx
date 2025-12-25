@@ -7,11 +7,13 @@ import { createClient } from '@/lib/supabase/client';
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const { theme, setTheme } = useTheme();
   const [isAdmin, setIsAdmin] = useState(false);
   const supabase = createClient();
 
   useEffect(() => {
+    setMounted(true);
     checkAdmin();
 
     // Subscribe to auth changes
@@ -136,7 +138,9 @@ export default function Header() {
             className="p-2 rounded-lg hover:bg-secondary/10 transition-colors"
             aria-label="Toggle theme"
           >
-            {theme === 'dark' ? (
+            {!mounted ? (
+              <Moon className="w-5 h-5" />
+            ) : theme === 'dark' ? (
               <Sun className="w-5 h-5" />
             ) : (
               <Moon className="w-5 h-5" />
