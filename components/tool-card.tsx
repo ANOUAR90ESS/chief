@@ -1,5 +1,6 @@
 import { Star, BadgeCheck, ExternalLink } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { AITool } from '@/lib/types';
 
 interface ToolCardProps {
@@ -7,6 +8,8 @@ interface ToolCardProps {
 }
 
 export default function ToolCard({ tool }: ToolCardProps) {
+  const imageUrl = tool.image_url || tool.imageUrl;
+
   return (
     <div className="group relative bg-background border border-border rounded-xl p-6 hover:border-primary/50 hover:shadow-lg transition-all duration-300">
       {/* Featured Badge */}
@@ -18,20 +21,32 @@ export default function ToolCard({ tool }: ToolCardProps) {
 
       <div className="flex flex-col h-full">
         {/* Header - Clickable */}
-        <Link href={`/tools/${tool.id}`} className="flex items-start gap-4 mb-4 cursor-pointer">
+        <div className="flex items-start gap-4 mb-4">
           {/* Tool Image/Icon */}
-          <div className="w-16 h-16 bg-gradient-to-br from-primary/20 to-accent/20 rounded-lg flex items-center justify-center flex-shrink-0">
-            <span className="text-2xl font-bold text-gradient">
-              {tool.name.charAt(0)}
-            </span>
-          </div>
+          <Link href={`/tools/${tool.id}`} className="w-16 h-16 bg-gradient-to-br from-primary/20 to-accent/20 rounded-lg flex items-center justify-center flex-shrink-0 overflow-hidden">
+            {imageUrl ? (
+              <Image
+                src={imageUrl}
+                alt={tool.name}
+                width={64}
+                height={64}
+                className="w-full h-full object-cover"
+              />
+            ) : (
+              <span className="text-2xl font-bold text-gradient">
+                {tool.name.charAt(0)}
+              </span>
+            )}
+          </Link>
 
           {/* Tool Info */}
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2 mb-1">
-              <h3 className="font-bold text-lg truncate group-hover:text-primary transition-colors">
-                {tool.name}
-              </h3>
+              <Link href={`/tools/${tool.id}`}>
+                <h3 className="font-bold text-lg truncate hover:text-primary transition-colors cursor-pointer">
+                  {tool.name}
+                </h3>
+              </Link>
               {tool.verified && (
                 <BadgeCheck className="w-5 h-5 text-primary flex-shrink-0" />
               )}
@@ -45,7 +60,7 @@ export default function ToolCard({ tool }: ToolCardProps) {
               </span>
             </div>
           </div>
-        </Link>
+        </div>
 
         {/* Description */}
         <p className="text-sm text-secondary mb-4 line-clamp-2 flex-1">

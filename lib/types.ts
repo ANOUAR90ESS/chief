@@ -10,6 +10,7 @@ export interface AITool {
   verified: boolean;
   featured: boolean;
   imageUrl: string;
+  image_url?: string;
   url: string;
 }
 
