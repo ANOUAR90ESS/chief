@@ -70,10 +70,11 @@ export default async function AllTools() {
         </div>
 
         <div className="mt-12 text-center">
-          <Link href="/tools">
-            <button className="px-8 py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors font-semibold">
-              View All Tools
-            </button>
+          <Link
+            href="/tools"
+            className="inline-block px-8 py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors font-semibold"
+          >
+            View All Tools
           </Link>
         </div>
       </div>
