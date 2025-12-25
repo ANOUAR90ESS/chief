@@ -1,6 +1,7 @@
 import { createClient } from '@/lib/supabase/server';
 import Header from '@/components/header';
 import Footer from '@/components/footer';
+import ToolReviews from '@/components/tool-reviews';
 import { notFound } from 'next/navigation';
 import { Star, ExternalLink, BadgeCheck, Calendar, TrendingUp } from 'lucide-react';
 
@@ -166,36 +167,7 @@ export default async function ToolDetailPage({ params }: { params: { id: string 
                 )}
 
                 {/* Reviews */}
-                <div className="bg-background border border-border rounded-xl p-6">
-                  <h2 className="text-2xl font-bold mb-6">Reviews</h2>
-                  {tool.reviews && tool.reviews.length > 0 ? (
-                    <div className="space-y-4">
-                      {tool.reviews.map((review: any) => (
-                        <div key={review.id} className="border-b border-border pb-4 last:border-0">
-                          <div className="flex items-start gap-3 mb-2">
-                            <div className="flex items-center gap-1">
-                              <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                              <span className="font-semibold">{review.rating}</span>
-                            </div>
-                            <div className="flex-1">
-                              <p className="font-semibold">
-                                {review.user?.display_name || 'Anonymous'}
-                              </p>
-                              <p className="text-sm text-secondary">
-                                {new Date(review.created_at).toLocaleDateString()}
-                              </p>
-                            </div>
-                          </div>
-                          {review.comment && (
-                            <p className="text-secondary ml-8">{review.comment}</p>
-                          )}
-                        </div>
-                      ))}
-                    </div>
-                  ) : (
-                    <p className="text-secondary text-center py-8">No reviews yet. Be the first to review!</p>
-                  )}
-                </div>
+                <ToolReviews toolId={params.id} initialReviews={tool.reviews || []} />
               </div>
 
               {/* Sidebar */}
