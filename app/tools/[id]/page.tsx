@@ -38,6 +38,7 @@ async function getTool(id: string) {
 
     return {
       ...tool,
+      category: tool.category?.name || 'Uncategorized',
       rating: averageRating,
       reviewCount: reviews.length,
     };
@@ -109,7 +110,7 @@ export default async function ToolDetailPage({ params }: { params: { id: string 
                     </div>
                     <div className="flex items-center gap-2 text-sm">
                       <span className="px-3 py-1 bg-secondary/10 rounded-full">
-                        {tool.category?.name || 'Uncategorized'}
+                        {tool.category}
                       </span>
                       <span className="px-3 py-1 bg-primary/10 text-primary rounded-full font-semibold">
                         {tool.pricing}

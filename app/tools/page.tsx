@@ -32,6 +32,7 @@ async function getAllTools() {
 
       return {
         ...tool,
+        category: tool.category?.name || 'Uncategorized',
         rating: averageRating,
         reviewCount: reviews.length,
       };

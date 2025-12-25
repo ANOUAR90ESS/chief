@@ -43,6 +43,7 @@ async function getCategoryTools(slug: string) {
 
       return {
         ...tool,
+        category: tool.category?.name || 'Uncategorized',
         rating: averageRating,
         reviewCount: reviews.length,
       };
