@@ -9,6 +9,7 @@ interface ToolCardProps {
 
 export default function ToolCard({ tool }: ToolCardProps) {
   const imageUrl = tool.image_url || tool.imageUrl;
+  const isBase64Image = imageUrl?.startsWith('data:image/');
 
   return (
     <div className="group relative bg-background border border-border rounded-xl p-6 hover:border-primary/50 hover:shadow-lg transition-all duration-300">
@@ -25,13 +26,21 @@ export default function ToolCard({ tool }: ToolCardProps) {
           {/* Tool Image/Icon */}
           <Link href={`/tools/${tool.id}`} className="w-16 h-16 bg-gradient-to-br from-primary/20 to-accent/20 rounded-lg flex items-center justify-center flex-shrink-0 overflow-hidden">
             {imageUrl ? (
-              <Image
-                src={imageUrl}
-                alt={tool.name}
-                width={64}
-                height={64}
-                className="w-full h-full object-cover"
-              />
+              isBase64Image ? (
+                <img
+                  src={imageUrl}
+                  alt={tool.name}
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                <Image
+                  src={imageUrl}
+                  alt={tool.name}
+                  width={64}
+                  height={64}
+                  className="w-full h-full object-cover"
+                />
+              )
             ) : (
               <span className="text-2xl font-bold text-gradient">
                 {tool.name.charAt(0)}

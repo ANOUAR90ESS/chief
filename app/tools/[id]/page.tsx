@@ -4,6 +4,7 @@ import Footer from '@/components/footer';
 import ToolReviews from '@/components/tool-reviews';
 import { notFound } from 'next/navigation';
 import { Star, ExternalLink, BadgeCheck, Calendar, TrendingUp } from 'lucide-react';
+import Image from 'next/image';
 
 export const dynamic = 'force-dynamic';
 
@@ -55,6 +56,9 @@ export default async function ToolDetailPage({ params }: { params: { id: string 
     notFound();
   }
 
+  const imageUrl = tool.image_url || tool.imageUrl;
+  const isBase64Image = imageUrl?.startsWith('data:image/');
+
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
@@ -76,10 +80,28 @@ export default async function ToolDetailPage({ params }: { params: { id: string 
               {/* Tool Header */}
               <div className="flex flex-col md:flex-row gap-8 items-start">
                 {/* Tool Icon */}
-                <div className="w-24 h-24 bg-gradient-to-br from-primary/20 to-accent/20 rounded-2xl flex items-center justify-center flex-shrink-0">
-                  <span className="text-4xl font-bold text-gradient">
-                    {tool.name.charAt(0)}
-                  </span>
+                <div className="w-24 h-24 bg-gradient-to-br from-primary/20 to-accent/20 rounded-2xl flex items-center justify-center flex-shrink-0 overflow-hidden">
+                  {imageUrl ? (
+                    isBase64Image ? (
+                      <img
+                        src={imageUrl}
+                        alt={tool.name}
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      <Image
+                        src={imageUrl}
+                        alt={tool.name}
+                        width={96}
+                        height={96}
+                        className="w-full h-full object-cover"
+                      />
+                    )
+                  ) : (
+                    <span className="text-4xl font-bold text-gradient">
+                      {tool.name.charAt(0)}
+                    </span>
+                  )}
                 </div>
 
                 {/* Tool Info */}
