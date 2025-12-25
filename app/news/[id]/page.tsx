@@ -35,6 +35,8 @@ export default async function NewsDetailPage({ params }: { params: { id: string 
     notFound();
   }
 
+  const isBase64Image = article.image_url?.startsWith('data:image/');
+
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
@@ -96,12 +98,20 @@ export default async function NewsDetailPage({ params }: { params: { id: string 
                 {/* Featured Image */}
                 {article.image_url && (
                   <div className="relative w-full h-96 mb-8 rounded-xl overflow-hidden bg-secondary/10">
-                    <Image
-                      src={article.image_url}
-                      alt={article.title}
-                      fill
-                      className="object-cover"
-                    />
+                    {isBase64Image ? (
+                      <img
+                        src={article.image_url}
+                        alt={article.title}
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      <Image
+                        src={article.image_url}
+                        alt={article.title}
+                        fill
+                        className="object-cover"
+                      />
+                    )}
                   </div>
                 )}
 

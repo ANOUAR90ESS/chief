@@ -59,7 +59,10 @@ export default async function NewsPage() {
               </div>
             ) : (
               <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {newsArticles.map((article: any) => (
+                {newsArticles.map((article: any) => {
+                  const isBase64Image = article.image_url?.startsWith('data:image/');
+
+                  return (
                   <Link
                     key={article.id}
                     href={`/news/${article.id}`}
@@ -67,12 +70,20 @@ export default async function NewsPage() {
                   >
                     {article.image_url && (
                       <div className="relative w-full h-48 bg-secondary/10">
-                        <Image
-                          src={article.image_url}
-                          alt={article.title}
-                          fill
-                          className="object-cover"
-                        />
+                        {isBase64Image ? (
+                          <img
+                            src={article.image_url}
+                            alt={article.title}
+                            className="w-full h-full object-cover"
+                          />
+                        ) : (
+                          <Image
+                            src={article.image_url}
+                            alt={article.title}
+                            fill
+                            className="object-cover"
+                          />
+                        )}
                       </div>
                     )}
                     <div className="p-6">
@@ -114,7 +125,8 @@ export default async function NewsPage() {
                       </div>
                     </div>
                   </Link>
-                ))}
+                  );
+                })}
               </div>
             )}
           </div>
